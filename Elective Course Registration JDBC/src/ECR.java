@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import com.elective.registration.ConnectionProvider;
+import java.sql.PreparedStatement;
+import java.sql.Connection;
 
 class MyFrame extends JFrame{
 
@@ -9,12 +12,12 @@ class MyFrame extends JFrame{
     JLabel title;
     JTextField sname, susn, sphone;
     JComboBox<String> sdept, sgender, spelective, soelective, sodept;
-    JButton submit;
+    JButton submit, delete, reset;
     JLabel msg;
 
     MyFrame(){
         setTitle("Elective Registration Form");
-        setSize(700,500);
+        setSize(700,700);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -57,7 +60,7 @@ class MyFrame extends JFrame{
         dept.setBounds(20,250,200,20);
         dept.setFont(new Font("Consolas", Font.BOLD, 20));
         c.add(dept);
-        String depts[] = {"Computer Science and Engineering", "Information Science and Engineering", "Electronics and Communication Engineering", "Electrical and Electronics Engineering", "Aeronautical Engineering", "Mechanical Engineering", "Civil Engineering"};
+        String depts[] = {"None","Computer Science and Engineering", "Information Science and Engineering", "Electronics and Communication Engineering", "Electrical and Electronics Engineering", "Aeronautical Engineering", "Mechanical Engineering", "Civil Engineering"};
         sdept = new JComboBox<String>(depts);
         sdept.setFont(new Font("Consolas", Font.BOLD, 15));
         sdept.setBounds(250,245,325,20);
@@ -67,7 +70,7 @@ class MyFrame extends JFrame{
         gender.setBounds(20,300,100,20);
         gender.setFont(new Font("Consolas", Font.BOLD, 20));
         c.add(gender);
-        String genders[] = {"Male", "Female", "Others"};
+        String genders[] = {"None","Male", "Female", "Others"};
         sgender = new JComboBox<String>(genders);
         sgender.setFont(new Font("Consolas", Font.BOLD, 15));
         sgender.setBounds(250,295,150,20);
@@ -75,13 +78,13 @@ class MyFrame extends JFrame{
 
         
         // displaying content of professional elective according to branch selected
-        String CSEpelective[] = {"Advanced Web Programming","Advanced Algorithms","Data Warehousing and Mining", "Advanced Java"};
+        String CSEpelective[] = {"None","Advanced Web Programming","Advanced Algorithms","Data Warehousing and Mining", "Advanced Java"};
         String ISEpelective[] = CSEpelective;
-        String ECpelective[] = {"Power Electronics", "System Modelling", "Speech Processing", "Artificial Neural Networks", "Cryptography and Network Security"};
-        String EEpelective[] = {"Fuzzy Logic","Modern Control Theory", "Design of Electical Machines","Special Electrical Machines", "Electrical and Electronics Measurements"};
-        String AEpelective[] = {"Control Engineering", "Finite Element Analysis", "Fracture Mechanics", "Turbo Machines", "Aircraft System and Instrumentation"};
-        String MEpelective[] = {"Theory of Elasticity", "Mechanics of Composite Materials","Energy Engineering", "IC Engines", "Industrial Engineering and Ergonomics","Non-Traditional Machining","Machine Drawing"};
-        String CEpelective[] = {"Theory of Elasticity", "Open Channel Hydraulics", "Railways, Airports and Harbours", "Wastewater Engineering", "Alternative Building Materials"};
+        String ECpelective[] = {"None","Power Electronics", "System Modelling", "Speech Processing", "Artificial Neural Networks", "Cryptography and Network Security"};
+        String EEpelective[] = {"None","Fuzzy Logic","Modern Control Theory", "Design of Electical Machines","Special Electrical Machines", "Electrical and Electronics Measurements"};
+        String AEpelective[] = {"None","Control Engineering", "Finite Element Analysis", "Fracture Mechanics", "Turbo Machines", "Aircraft System and Instrumentation"};
+        String MEpelective[] = {"None","Theory of Elasticity", "Mechanics of Composite Materials","Energy Engineering", "IC Engines", "Industrial Engineering and Ergonomics","Non-Traditional Machining","Machine Drawing"};
+        String CEpelective[] = {"None","Theory of Elasticity", "Open Channel Hydraulics", "Railways, Airports and Harbours", "Wastewater Engineering", "Alternative Building Materials"};
         sdept.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 String selectedOption = (String) sdept.getSelectedItem();
@@ -116,24 +119,24 @@ class MyFrame extends JFrame{
         oelective.setBounds(20,400,200,20);
         oelective.setFont(new Font("Consolas", Font.BOLD, 20));
         c.add(oelective);
-        String sodepts[] = {"CSE","ISE","ECE","EEE","AE","ME","CE"};
+        String sodepts[] = {"None","CSE","ISE","ECE","EEE","AE","ME","CE"};
         sodept = new JComboBox<>(sodepts);
         sodept.setFont(new Font("Consolas", Font.BOLD, 15));
-        sodept.setBounds(250,395,50,20);
+        sodept.setBounds(250,395,60,20);
         c.add(sodept);
         soelective = new JComboBox<String>();
         soelective.setFont(new Font("Consolas", Font.BOLD, 15));
-        soelective.setBounds(300,395,300,20);
+        soelective.setBounds(310,395,300,20);
         c.add(soelective);
 
         // Dynamic Open Elective Implementation
-        String CSEoelective[] = {"NoSQL","Enterprise Resource Planning","Project Management","Principles of Cyber Security"};
+        String CSEoelective[] = {"None","NoSQL","Enterprise Resource Planning","Project Management","Principles of Cyber Security"};
         String ISEoelective[] = CSEoelective;
-        String ECoelective[] = {"Consumer Electronics","Fuzzy Logic and Applications","Heterogeneous Computing", "Requirements Engineering"};
-        String EEoelective[] = {"Renewable Energy Sources","Illumination Engineering","PLC and Industrial Automation", "Special Electric Machines","Embedded Systems"};
-        String AEoelective[] = {"Wind Tunnel Techniques","Measurement and Metrology","Composite Materials"};
-        String MEoelective[] = {"Product Design & Rapid Prototyping", "Automotive Engg. and Current Tech.","Mechatronics","Statistics for Engineers"};
-        String CEoelective[] = {"Environmental Impace Assesment","Road Safety"};
+        String ECoelective[] = {"None","Consumer Electronics","Fuzzy Logic and Applications","Heterogeneous Computing", "Requirements Engineering"};
+        String EEoelective[] = {"None","Renewable Energy Sources","Illumination Engineering","PLC and Industrial Automation", "Special Electric Machines","Embedded Systems"};
+        String AEoelective[] = {"None","Wind Tunnel Techniques","Measurement and Metrology","Composite Materials"};
+        String MEoelective[] = {"None","Product Design & Rapid Prototyping", "Automotive Engg. and Current Tech.","Mechatronics","Statistics for Engineers"};
+        String CEoelective[] = {"None","Environmental Impace Assesment","Road Safety"};
         sodept.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 String selectedOption = (String) sodept.getSelectedItem();
@@ -152,6 +155,76 @@ class MyFrame extends JFrame{
                     break;
                     case "CE": soelective.setModel(new DefaultComboBoxModel<>(CEoelective));
                 }
+            }
+        });
+
+        submit = new JButton("Submit");
+        submit.setBounds(20,450,100,30);
+        c.add(submit);
+
+        submit.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                String name = sname.getText();
+                String usn = susn.getText();
+                String phone = sphone.getText();
+                String dept = (String)sdept.getSelectedItem();
+                String gender = (String)sgender.getSelectedItem();
+                String professionalElective = (String)spelective.getSelectedItem();
+                String openElective = (String)soelective.getSelectedItem();
+
+                try {
+                    Connection con = ConnectionProvider.createConnection(); 
+                    String submit_query = "insert into Student(susn,sname,sphone,sdept,sgender,spelective,soelective) values(?,?,?,?,?,?,?)";
+
+                    //preparedStatement
+                    PreparedStatement pstmt = con.prepareStatement(submit_query);
+                    
+                    //set the values of parameter
+                    pstmt.setString(1, usn);
+                    pstmt.setString(1, name);
+                    pstmt.setString(1, phone);
+                    pstmt.setString(1, dept);
+                    pstmt.setString(1, gender);
+                    pstmt.setString(1, professionalElective);
+                    pstmt.setString(1, openElective);
+                    
+                    //execute
+                    pstmt.executeUpdate();
+
+                    System.out.println("Added succesfully!!");
+
+                } catch (Exception except) {
+                    except.printStackTrace();
+                }
+
+                System.out.println(name);
+                System.out.println(usn);
+                System.out.println(phone);
+                System.out.println(dept);
+                System.out.println(gender);
+                System.out.println(professionalElective);
+                System.out.println(openElective);
+            }
+        });
+
+        delete = new JButton("Delete");
+        delete.setBounds(150,450,100,30);
+        c.add(delete);
+
+        reset = new JButton("Reset");
+        reset.setBounds(280,450,100,30);
+        c.add(reset);
+
+        reset.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                sname.setText("");
+                susn.setText("");
+                sphone.setText("");
+                sdept.setSelectedItem("None");
+                sgender.setSelectedItem("None");
+                spelective.setSelectedItem("None");
+                soelective.setSelectedItem("None");
+                sodept.setSelectedItem("None");
             }
         });
 
