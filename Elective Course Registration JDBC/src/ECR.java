@@ -94,6 +94,8 @@ class MyFrame extends JFrame{
         String notME[] = {"None","CSE","ISE","ECE","EEE","AE","CE"};
         String notCE[] = {"None","CSE","ISE","ECE","EEE","AE","ME"};
         
+        // Implementation of open elective branch can't be same as professional elective branch.
+        // Course show up according to branch selected.
         sdept.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 String selectedOption = (String) sdept.getSelectedItem();
