@@ -15,12 +15,23 @@ class MyFrame extends JFrame{
     JButton submit, delete, reset;
     JLabel msg;
 
-    MyFrame(){
+    MyFrame(){   
         setTitle("Elective Registration Form");
-        setSize(700,700);
+        setSize(700,550);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+        Image icon = Toolkit.getDefaultToolkit().getImage("./images/GIT_logo.png");
+        setIconImage(icon);   
+        setContentPane(new JPanel() {
+            Image backgroundImage = new ImageIcon("./images/background_GUI.jpg").getImage();
+            
+            @Override
+            protected void paintComponent(Graphics g) {
+              super.paintComponent(g);
+              g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+            }
+        });
+    
         Container c = getContentPane();
         c.setLayout(null);
 
@@ -94,8 +105,6 @@ class MyFrame extends JFrame{
         String notME[] = {"None","CSE","ISE","ECE","EEE","AE","CE"};
         String notCE[] = {"None","CSE","ISE","ECE","EEE","AE","ME"};
         
-        // Implementation of open elective branch can't be same as professional elective branch.
-        // Course show up according to branch selected.
         sdept.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 String selectedOption = (String) sdept.getSelectedItem();
@@ -180,7 +189,8 @@ class MyFrame extends JFrame{
         });
 
         submit = new JButton("Submit");
-        submit.setBounds(20,450,100,30);
+        submit.setFont(new Font("Consolas", Font.PLAIN, 20));
+        submit.setBounds(20,440,200,50);
         c.add(submit);
 
         submit.addActionListener(new ActionListener(){
@@ -226,7 +236,8 @@ class MyFrame extends JFrame{
         });
 
         delete = new JButton("Delete");
-        delete.setBounds(150,450,100,30);
+        delete.setFont(new Font("Consolas", Font.PLAIN, 20));
+        delete.setBounds(240,440,200,50);
         c.add(delete);
         
         delete.addActionListener(new ActionListener(){
@@ -254,7 +265,8 @@ class MyFrame extends JFrame{
         });
 
         reset = new JButton("Reset");
-        reset.setBounds(280,450,100,30);
+        reset.setFont(new Font("Consolas", Font.PLAIN, 20));
+        reset.setBounds(460,440,200,50);
         c.add(reset);
 
         reset.addActionListener(new ActionListener(){
