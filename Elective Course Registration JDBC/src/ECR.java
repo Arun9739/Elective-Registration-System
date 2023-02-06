@@ -281,6 +281,7 @@ class MyFrame extends JFrame{
                 sodept.setSelectedItem("None");
             }
         });
+
         setVisible(true);
     }
 
