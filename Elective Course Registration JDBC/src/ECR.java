@@ -13,7 +13,6 @@ class MyFrame extends JFrame{
     JTextField sname, susn, sphone;
     JComboBox<String> sdept, sgender, spelective, soelective, sodept;
     JButton submit, delete, reset;
-    JLabel msg;
 
     MyFrame(){   
         setTitle("Elective Registration Form");
