@@ -10,4 +10,6 @@ create table Student(
 	soelective varchar(100) not null
 );
 
+select * from Student;
+
 drop table Student;
