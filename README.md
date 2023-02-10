@@ -1,6 +1,6 @@
 # Elective-Registration-System
 
-A college elective subject registration system in Java GUI.
+A college elective(both professional and open elective) subject registration system in Java GUI.
 
 ## Instructions:
 <ol>
