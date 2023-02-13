@@ -11,6 +11,7 @@ public class ConnectionProvider {
             Class.forName("com.mysql.jdbc.Driver");
 
             //creating connection
+            //edit according to your setup.
             String USER = "root";
             String PASSWORD = "12345";
             String URL = "jdbc:mysql://localhost:3306/elective_registration_jdbc";
